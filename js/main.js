@@ -4,8 +4,5 @@ const getRandomInt = (min, max) => {
   return Math.round(Math.random() * (max - min) + min);
 };
 const checkCommentLength = (commentLength, maxLength) => commentLength <= maxLength;
-
-// eslint-disable-next-line no-console
-console.log(getRandomInt(1, 3));
-// eslint-disable-next-line no-console
-console.log(checkCommentLength(3,5));
+getRandomInt(1, 3);
+checkCommentLength(3,5);
