@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 const DESCRIPTION = [
   'Если смогу, я сделаю это. Конец истории.',
   'Смейтесь как только умеете, любите столько, сколько живете.',
@@ -61,4 +59,3 @@ const createComment = (id) => {
 const createComments = (length) => {
   return Array.from({length: length}, (_, index) => createComment(index));
 };
->>>>>>> Stashed changes
