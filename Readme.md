@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Ольга  Рушкова](https://up.htmlacademy.ru/univer-js1/1/user/2220639).
-* Наставник: `Неизвестно`.
+* Наставник: [Геннадий Максимов](https://htmlacademy.ru/profile/gennadiy).
 
 ---
 
