@@ -16,10 +16,26 @@ export const MESSAGE = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 export const NAMES = [
-'Михаил',
-'Анна',
-'Анастасия',
-'Тимур',
-'Дмитрий',
-'Виктория'
+  'Михаил',
+  'Анна',
+  'Анастасия',
+  'Тимур',
+  'Дмитрий',
+  'Виктория'
 ];
+
+export const COUNT_PHOTOS = 25;
+
+export const COUNT_COMMENTS = {
+  min: 1,
+  max: 6
+};
+export const COUNT_LIKES = {
+  min: 15,
+  max: 200
+};
+export const AVATAR_IND = {
+  min: 1,
+  max: 6
+};
+
