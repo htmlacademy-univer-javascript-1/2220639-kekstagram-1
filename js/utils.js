@@ -6,6 +6,8 @@ const getRandomInt = (a, b) => {
 const getRandomArrayElement = (array) => {
   return array[getRandomInt(0, array.length - 1)]
 };
+const checkCommentLength = (comment, maxLength) => comment.length <= maxLength;
+checkCommentLength(3,5);
 
 export {getRandomArrayElement, getRandomInt};
 

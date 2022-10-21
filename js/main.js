@@ -1,3 +1,4 @@
-import {createMockyData} from "./mocky-data.js";
+import {createPhotos} from "./mock.js";
+import {COUNT_PHOTOS} from "./consts.js";
 
-const mockyData = createMockyData(15);
+const mockyData = createPhotos(COUNT_PHOTOS);
