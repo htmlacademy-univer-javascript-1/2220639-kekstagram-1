@@ -6,6 +6,4 @@ import {initThumbnails} from './thumbnails.js';
 
 const mockyData = getPhotos();
 initThumbnails(mockyData);
->>>>>>> Stashed changes
 
-const mockyData = createMockyData(15);
