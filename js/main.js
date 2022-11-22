@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-import {createMockyData} from "./mocky-data.js";
-=======
 import {getPhotos} from './mock.js';
 import {initThumbnails} from './thumbnails.js';
 

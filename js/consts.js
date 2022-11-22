@@ -1,6 +1,4 @@
-import {getRandomArrayElement, getRandomInt} from "./random-util.js";
-
-const DESCRIPTION = [
+export const DESCRIPTION = [
   'Если смогу, я сделаю это. Конец истории.',
   'Смейтесь как только умеете, любите столько, сколько живете.',
   'Помните: вы единственный человек, который может наполнить ваш мир солнечным светом.',
@@ -9,7 +7,7 @@ const DESCRIPTION = [
   'Всегда начинайте свой день с хороших людей и кофе.',
   'Ни о чем не беспокойтесь. Потому что все лучшие умы на работе.'
 ];
-const MESSAGE = [
+export const MESSAGE = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -17,39 +15,26 @@ const MESSAGE = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
-const NAMES = [
-'Михаил',
-'Анна',
-'Анастасия',
-'Тимур',
-'Дмитрий',
-'Виктория'
+export const NAMES = [
+  'Михаил',
+  'Анна',
+  'Анастасия',
+  'Тимур',
+  'Дмитрий',
+  'Виктория'
 ];
 
+export const COUNT_PHOTOS = 25;
 
-const createMockyData = (length) => {
-  return Array.from({length: length}, (_, index) => createPhotography(index));
-}
-
-const createPhotography = (id) => {
-  return {
-    id,
-    url: `photos/${id}.jpg`,
-    description: getRandomArrayElement(DESCRIPTION),
-    likes:  getRandomInt(15, 200),
-    comments: createComments(getRandomInt(1, 6))
-  }
+export const COUNT_COMMENTS = {
+  min: 1,
+  max: 6
 };
-const createComment = (id) => {
-  return {
-    id,
-    avatar: `img/avatar-${getRandomInt(1,6)}.svg`,
-    message: getRandomArrayElement(MESSAGE),
-    name: getRandomArrayElement(NAMES), 
-  }
+export const COUNT_LIKES = {
+  min: 15,
+  max: 200
 };
-const createComments = (length) => {
-  return Array.from({length: length}, (_, index) => createComment(index));
+export const AVATAR_IND = {
+  min: 1,
+  max: 6
 };
-export{createMockyData};
-
