@@ -1,3 +1,6 @@
-import {createMockyData} from "./mocky-data.js";
+import {getPhotos} from './mock.js';
+import {initThumbnails} from './thumbnails.js';
 
-const mockyData = createMockyData(15);
+const mockyData = getPhotos();
+initThumbnails(mockyData);
+
