@@ -660,6 +660,43 @@ main {
  * Блок добавления хэштегов и комментария к изображению
  */
 
+
+ /**
+ * НАЧАЛО ИЗМЕНЕНИЙ ДЛЯ ВАЛИДАТОРА.
+ */
+
+.has-danger .text__hashtags {
+  border-width: 5px;
+  border-color: #dc1d34;
+}
+
+ /**
+ * можно убрать, выравнивание ошибки
+ */
+.pristine-error {
+  margin-bottom: 30px;
+  border: none;
+
+  color:#dc1d34;
+  font-style: italic;
+  font-size: 10px;
+
+  display: block;
+
+}
+ /**
+ * КОНЕЦ ИЗМЕНЕНИЙ ДЛЯ ВАЛИДАТОРА. вроде бы. 
+ */
+
+.text {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 5px;
+
+  text-align: center;
+  border: none;
+}
+
 .text {
   margin: 0;
   padding: 0;
@@ -682,6 +719,7 @@ main {
 
   border-radius: 5px;
 }
+
 
 .text__description {
   width: 450px;
