@@ -24,6 +24,15 @@ export const NAMES = [
   'Виктория'
 ];
 
+export const ERROR_MESSAGES = {
+  hashtagsRepeated: 'Хэштеги повторяются',
+  tooManyHashtags: 'Количество хэштегов не должно превышать 5 штук',
+  wrongHashtag: 'Хэштеги не соответствуют требуемому формату (начинаются с символа #, длина меньше 20 символов, включая #)'
+};
+export const STEP_ADDED_COMMENTS = 5;
+
+export const DEFAULT_RENDERED_COMMENTS = 5;
+
 export const COUNT_PHOTOS = 25;
 
 export const COUNT_COMMENTS = {

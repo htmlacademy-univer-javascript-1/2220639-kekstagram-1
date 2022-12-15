@@ -27,22 +27,6 @@ const onFileUpload = (evt) => {
   document.querySelector('body').classList.add('modal-open');
 };
 
-const cancelEditForm = () => {
-  const editForm = form.querySelector('.img-upload__overlay');
-  editForm.classList.add('hidden');
-  window.removeEventListener('keydown', onEscClick);
-};
-
-const onEditFormCancelClick = () => {
-  cancelEditForm();
-};
-
-function onEscClick (evt) {
-  if (evt.key === 'Escape') {
-    cancelEditForm();
-  }
-}
-
 const onEditFormInput = (evt) => {
   evt.preventDefault();
   pristine.validate();
@@ -55,6 +39,35 @@ const onEditFormSubmit = (evt) => {
   }
 };
 
+const onInputFormEscapeClick = (evt) => {
+  if (evt.key === 'Escape') {
+    evt.stopPropagation();
+  }
+};
+
+const onCancelEditForm = () => {
+  window.removeEventListener('keydown', onEscClick);
+  form.removeEventListener('input', onEditFormInput);
+  form.querySelector('.text__hashtags').removeEventListener('keydown', onInputFormEscapeClick);
+  form.querySelector('.text__description').removeEventListener('keydown', onInputFormEscapeClick);
+  form.removeEventListener('submit', onEditFormSubmit);
+};
+
+const cancelEditForm = () => {
+  const editForm = form.querySelector('.img-upload__overlay');
+  editForm.classList.add('hidden');
+  onCancelEditForm();
+};
+
+const onEditFormCancelClick = () => {
+  cancelEditForm();
+};
+
+function onEscClick (evt) {
+  if (evt.key === 'Escape') {
+    cancelEditForm();
+  }
+}
 
 export const initForm = () => {
   const startUpload = form.querySelector('.img-upload__start');
@@ -62,8 +75,8 @@ export const initForm = () => {
   const cancelEditFormButton = form.querySelector('.img-upload__cancel');
   cancelEditFormButton.addEventListener('click', onEditFormCancelClick);
   form.addEventListener('input', onEditFormInput);
-  form.querySelector('.text__hashtags').addEventListener('keydown', (evt) => evt.stopPropagation());
-  form.querySelector('.text__description').addEventListener('keydown', (evt) => evt.stopPropagation());
+  form.querySelector('.text__hashtags').addEventListener('keydown', onInputFormEscapeClick);
+  form.querySelector('.text__description').addEventListener('keydown', onInputFormEscapeClick);
   form.addEventListener('submit', onEditFormSubmit);
 };
 
