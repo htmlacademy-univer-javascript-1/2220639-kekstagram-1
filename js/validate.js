@@ -1,9 +1,4 @@
-
-const ERROR_MESSAGES = {
-  hashtagsRepeated: 'Хэштеги повторяются',
-  tooManyHashtags: 'Количество хэштегов не должно превышать 5 штук',
-  wrongHashtag: 'Хэштеги не соответствуют требуемому формату (начинаются с символа #, длина меньше 20 символов, включая #)'
-};
+import { ERROR_MESSAGES } from './consts.js';
 
 let errorMessage = '';
 
