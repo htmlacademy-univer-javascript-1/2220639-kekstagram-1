@@ -1,9 +1,9 @@
-import { ERROR_MESSAGES } from './consts.js';
+import { ERROR_MESSAGES, PRISTINE_CONFIG } from './consts.js';
+import { checkCommentLength } from './utils.js';
 
 let errorMessage = '';
 
-export const getErrorMessage = () => errorMessage;
-
+const getErrorMessage = () => errorMessage;
 
 const validateHashtag = (hashtag) => {
   const hashtagFormat = new RegExp('^#[A-Za-zА-Яа-яЁё0-9]{1,19}$');
@@ -22,7 +22,7 @@ const hashtagsRepeated = (hashtags) => {
   });
 };
 
-export const validateHashtags = (inputValue) => {
+const validateHashtags = (inputValue) => {
   if (inputValue.length === 0) {
     return true;
   }
@@ -37,3 +37,13 @@ export const validateHashtags = (inputValue) => {
   }
   return hashtags.every((value) => validateHashtag(value));
 };
+
+const initPristine = () => {
+  const form = document.querySelector('.img-upload__form');
+  const pristine = new Pristine(form, PRISTINE_CONFIG);
+  pristine.addValidator(form.querySelector('.text__hashtags'), validateHashtags, getErrorMessage);
+  pristine.addValidator(form.querySelector('.text__description'), checkCommentLength, 'Комментарий не должен быть длиннее 140 символов');
+  return pristine;
+};
+
+export const getPristine = () => initPristine();

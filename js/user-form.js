@@ -1,27 +1,13 @@
-import { validateHashtags, getErrorMessage } from './validate.js';
+import { getPristine } from './validate.js';
+import { onScaleControlBiggerBtnClick, onScaleControlSmallerBtnClick, setDefaultScale } from './scale.js';
+import { onChangeImageEffect, initSlider} from './filter-effects.js';
 
 const form = document.querySelector('.img-upload__form');
-
-const defaultConfig = {
-  // class of the parent element where the error/success class is added
-  classTo: 'img-upload__field-wrapper',
-  errorClass: 'has-danger',
-  successClass: 'has-success',
-  // class of the parent element where error text element is appended
-  errorTextParent: 'img-upload__field-wrapper',
-  // type of element to create for the error text
-  errorTextTag: 'div',
-  // class of the error text element
-  errorTextClass: 'pristine-error'
-};
-
-
-const pristine = new Pristine(form, defaultConfig);
-pristine.addValidator(form.querySelector('.text__hashtags'), validateHashtags, getErrorMessage, 2, false);
+const editForm = form.querySelector('.img-upload__overlay');
+const pristine = getPristine();
 
 const onFileUpload = (evt) => {
   evt.preventDefault();
-  const editForm = form.querySelector('.img-upload__overlay');
   window.addEventListener('keydown', onEscClick);
   editForm.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
@@ -47,14 +33,10 @@ const onInputFormEscapeClick = (evt) => {
 
 const onCancelEditForm = () => {
   window.removeEventListener('keydown', onEscClick);
-  form.removeEventListener('input', onEditFormInput);
-  form.querySelector('.text__hashtags').removeEventListener('keydown', onInputFormEscapeClick);
-  form.querySelector('.text__description').removeEventListener('keydown', onInputFormEscapeClick);
-  form.removeEventListener('submit', onEditFormSubmit);
+  setDefaultScale();
 };
 
 const cancelEditForm = () => {
-  const editForm = form.querySelector('.img-upload__overlay');
   editForm.classList.add('hidden');
   onCancelEditForm();
 };
@@ -69,14 +51,17 @@ function onEscClick (evt) {
   }
 }
 
+
 export const initForm = () => {
-  const startUpload = form.querySelector('.img-upload__start');
-  startUpload.addEventListener('change', onFileUpload);
-  const cancelEditFormButton = form.querySelector('.img-upload__cancel');
-  cancelEditFormButton.addEventListener('click', onEditFormCancelClick);
+  form.querySelector('.img-upload__start').addEventListener('change', onFileUpload);
+  form.querySelector('.img-upload__cancel').addEventListener('click', onEditFormCancelClick);
   form.addEventListener('input', onEditFormInput);
   form.querySelector('.text__hashtags').addEventListener('keydown', onInputFormEscapeClick);
   form.querySelector('.text__description').addEventListener('keydown', onInputFormEscapeClick);
   form.addEventListener('submit', onEditFormSubmit);
+  form.querySelector('.scale__control--bigger').addEventListener('click', onScaleControlBiggerBtnClick);
+  form.querySelector('.scale__control--smaller').addEventListener('click', onScaleControlSmallerBtnClick);
+  document.querySelector('.img-upload__effects').addEventListener('change', onChangeImageEffect);
+  initSlider();
 };
 

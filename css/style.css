@@ -660,7 +660,6 @@ main {
  * Блок добавления хэштегов и комментария к изображению
  */
 
-
  /**
  * НАЧАЛО ИЗМЕНЕНИЙ ДЛЯ ВАЛИДАТОРА.
  */
@@ -682,25 +681,15 @@ main {
   font-size: 10px;
 
   display: block;
-
 }
  /**
- * КОНЕЦ ИЗМЕНЕНИЙ ДЛЯ ВАЛИДАТОРА. вроде бы. 
+ * КОНЕЦ ИЗМЕНЕНИЙ ДЛЯ ВАЛИДАТОРА. 
  */
 
 .text {
   margin: 0;
   padding: 0;
   margin-bottom: 5px;
-
-  text-align: center;
-  border: none;
-}
-
-.text {
-  margin: 0;
-  padding: 0;
-  margin-bottom: 30px;
 
   text-align: center;
   border: none;
