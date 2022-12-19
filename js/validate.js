@@ -39,10 +39,10 @@ const validateHashtags = (inputValue) => {
 };
 
 const initPristine = () => {
-  const form = document.querySelector('.img-upload__form');
-  const pristine = new Pristine(form, PRISTINE_CONFIG);
-  pristine.addValidator(form.querySelector('.text__hashtags'), validateHashtags, getErrorMessage);
-  pristine.addValidator(form.querySelector('.text__description'), checkCommentLength, 'Комментарий не должен быть длиннее 140 символов');
+  const formElement = document.querySelector('.img-upload__form');
+  const pristine = new Pristine(formElement, PRISTINE_CONFIG);
+  pristine.addValidator(formElement.querySelector('.text__hashtags'), validateHashtags, getErrorMessage);
+  pristine.addValidator(formElement.querySelector('.text__description'), checkCommentLength, 'Комментарий не должен быть длиннее 140 символов');
   return pristine;
 };
 
