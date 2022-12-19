@@ -1,9 +1,10 @@
 import  { DEFAULT_RENDERED_COMMENTS, STEP_ADDED_COMMENTS } from './consts.js';
+import { isEsc } from './utils.js';
 
-const bigPicture = document.querySelector('.big-picture');
-const bigPictureCommentsLoaderBtn = bigPicture.querySelector('.comments-loader');
-const bigPictureCounterComments = bigPicture.querySelector('.social__comment-count');
-const bigPictureCommentsList = bigPicture.querySelector('.social__comments');
+const bigPictureElement = document.querySelector('.big-picture');
+const bigPictureCommentsLoaderButtonElement = bigPictureElement.querySelector('.comments-loader');
+const bigPictureCounterCommentsElement = bigPictureElement.querySelector('.social__comment-count');
+const bigPictureCommentsListElement = bigPictureElement.querySelector('.social__comments');
 
 let actualComments = [];
 let countRenderedComments = DEFAULT_RENDERED_COMMENTS;
@@ -11,8 +12,8 @@ let countRenderedComments = DEFAULT_RENDERED_COMMENTS;
 const getCounterCommentsTemplate = (commentsCount) => `${Math.min(countRenderedComments, commentsCount)} из <span class="comments-count">${commentsCount}</span> комментариев`;
 
 const getCounterComments = () => {
-  bigPictureCounterComments.innerHTML='';
-  bigPictureCounterComments.insertAdjacentHTML('afterbegin', getCounterCommentsTemplate(actualComments.length));
+  bigPictureCounterCommentsElement.innerHTML='';
+  bigPictureCounterCommentsElement.insertAdjacentHTML('afterbegin', getCounterCommentsTemplate(actualComments.length));
 };
 
 const initComment = (comment) =>  `<li class="social__comment">
@@ -27,29 +28,29 @@ const initComment = (comment) =>  `<li class="social__comment">
 const renderComments = () => {
   getCounterComments();
 
-  bigPictureCommentsList.innerHTML='';
+  bigPictureCommentsListElement.innerHTML='';
   const commentsTemplate = actualComments.slice(0, countRenderedComments).map((comment) => initComment(comment)).join('');
-  bigPictureCommentsList.insertAdjacentHTML('afterbegin', commentsTemplate);
+  bigPictureCommentsListElement.insertAdjacentHTML('afterbegin', commentsTemplate);
 
   if (countRenderedComments >= actualComments.length) {
-    bigPictureCommentsLoaderBtn.removeEventListener('click', onBigPictureCommentsLoaderBtnClick);
-    bigPictureCommentsLoaderBtn.classList.add('hidden');
+    bigPictureCommentsLoaderButtonElement.removeEventListener('click', onBigPictureCommentsLoaderButtonClick);
+    bigPictureCommentsLoaderButtonElement.classList.add('hidden');
   }
 };
 
-function onBigPictureCommentsLoaderBtnClick() {
+function onBigPictureCommentsLoaderButtonClick() {
   countRenderedComments += STEP_ADDED_COMMENTS;
   renderComments();
 }
 
 const initComments = (comments) => {
   if (comments.length === 0) {
-    bigPictureCommentsLoaderBtn.classList.add('hidden');
-    bigPictureCounterComments.textContent='Нет комментариев';
+    bigPictureCommentsLoaderButtonElement.classList.add('hidden');
+    bigPictureCounterCommentsElement.textContent='Нет комментариев';
     return;
   }
   actualComments = comments.slice();
-  bigPictureCommentsLoaderBtn.addEventListener('click', onBigPictureCommentsLoaderBtnClick);
+  bigPictureCommentsLoaderButtonElement.addEventListener('click', onBigPictureCommentsLoaderButtonClick);
   renderComments(actualComments);
 };
 
@@ -57,18 +58,18 @@ const onCancelBigPicture = () => {
   document.querySelector('body')
     .classList.remove('modal-open');
   window.removeEventListener('keydown', onEscClick);
-  bigPictureCommentsLoaderBtn.classList.remove('hidden');
-  bigPictureCommentsLoaderBtn.removeEventListener('click', onBigPictureCommentsLoaderBtnClick);
+  bigPictureCommentsLoaderButtonElement.classList.remove('hidden');
+  bigPictureCommentsLoaderButtonElement.removeEventListener('click', onBigPictureCommentsLoaderButtonClick);
   countRenderedComments = DEFAULT_RENDERED_COMMENTS;
 };
 
 const cancelBigPicture = () => {
-  bigPicture.classList.add('hidden');
+  bigPictureElement.classList.add('hidden');
   onCancelBigPicture();
 };
 
 function onEscClick (evt) {
-  if (evt.key === 'Escape') {
+  if (isEsc(evt)) {
     cancelBigPicture();
   }
 }
@@ -78,19 +79,19 @@ const onCancelBigPictureClick = () => {
 };
 
 const initBigPicture = (photo) => {
-  bigPicture.querySelector('img').src = photo.url;
-  bigPicture.querySelector('.likes-count').textContent = photo.likes;
-  bigPicture.querySelector('.comments-count').textContent = photo.comments.length;
-  bigPicture.querySelector('.social__caption').textContent = photo.description;
+  bigPictureElement.querySelector('img').src = photo.url;
+  bigPictureElement.querySelector('.likes-count').textContent = photo.likes;
+  bigPictureElement.querySelector('.comments-count').textContent = photo.comments.length;
+  bigPictureElement.querySelector('.social__caption').textContent = photo.description;
   initComments(photo.comments);
   window.addEventListener('keydown', onEscClick);
-  const cancelButton = bigPicture.querySelector('.big-picture__cancel');
+  const cancelButton = bigPictureElement.querySelector('.big-picture__cancel');
   cancelButton.addEventListener('click', onCancelBigPictureClick);
 };
 
 export const openBigPicture = (photo) => {
   initBigPicture(photo);
-  bigPicture.classList.remove('hidden');
+  bigPictureElement.classList.remove('hidden');
   document.querySelector('body')
     .classList.add('modal-open');
 };

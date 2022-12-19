@@ -1,13 +1,17 @@
 import { getPristine } from './validate.js';
-import { onScaleControlBiggerBtnClick, onScaleControlSmallerBtnClick, setDefaultScale } from './scale.js';
+import { onScaleControlBiggerButtonClick, onScaleControlSmallerButtonClick, setDefaultScale } from './scale.js';
 import { onChangeImageEffect, initSlider, setDefaultEffect} from './filter-effects.js';
 import { sendData } from './api.js';
 import { renderMessage } from './render-message.js';
+import { insertUploadedImage } from './upload-image.js';
+import { isEsc } from './utils.js';
 
-const form = document.querySelector('.img-upload__form');
-const editForm = form.querySelector('.img-upload__overlay');
-const submitButton = form.querySelector('.img-upload__submit');
+
+const formElement = document.querySelector('.img-upload__form');
+const editFormElement = formElement.querySelector('.img-upload__overlay');
+const submitButton = formElement.querySelector('.img-upload__submit');
 const pristine = getPristine();
+const fileChooser = formElement.querySelector('.img-upload__input[type=file]');
 
 
 const blockSubmitButton = () => {
@@ -20,12 +24,6 @@ const unblockSubmitButton = () => {
   submitButton.textContent = 'Опубликовать';
 };
 
-const onFileUpload = (evt) => {
-  evt.preventDefault();
-  window.addEventListener('keydown', onEscClick);
-  editForm.classList.remove('hidden');
-  document.querySelector('body').classList.add('modal-open');
-};
 
 const onEditFormInput = (evt) => {
   evt.preventDefault();
@@ -33,26 +31,18 @@ const onEditFormInput = (evt) => {
 };
 
 const onInputFormEscapeClick = (evt) => {
-  if (evt.key === 'Escape') {
+  if (isEsc(evt)) {
     evt.stopPropagation();
   }
 };
 
 const resetInputValue = () => {
-  form.querySelector('.text__hashtags').value = '';
-  form.querySelector('.text__description').value = '';
-};
-
-const onCancelEditForm = () => {
-  window.removeEventListener('keydown', onEscClick);
-  setDefaultScale();
-  setDefaultEffect();
-  resetInputValue();
-
+  formElement.querySelector('.text__hashtags').value = '';
+  formElement.querySelector('.text__description').value = '';
 };
 
 const cancelEditForm = () => {
-  editForm.classList.add('hidden');
+  editFormElement.classList.add('hidden');
   onCancelEditForm();
 };
 
@@ -60,11 +50,11 @@ const onEditFormCancelClick = () => {
   cancelEditForm();
 };
 
-function onEscClick (evt) {
-  if (evt.key === 'Escape') {
+const onEscClick = (evt) => {
+  if (isEsc(evt)) {
     cancelEditForm();
   }
-}
+};
 
 const onSuccess = () => {
   cancelEditForm();
@@ -86,17 +76,39 @@ const onEditFormSubmit = (evt) => {
   }
 };
 
+function onCancelEditForm() {
+  window.removeEventListener('keydown', onEscClick);
+  setDefaultScale();
+  setDefaultEffect();
+  resetInputValue();
+  formElement.querySelector('.img-upload__cancel').removeEventListener('click', onEditFormCancelClick);
+  formElement.removeEventListener('input', onEditFormInput);
+  formElement.querySelector('.img-upload__text').removeEventListener('keydown', onInputFormEscapeClick);
+  formElement.removeEventListener('submit', onEditFormSubmit);
+  formElement.querySelector('.scale__control--bigger').removeEventListener('click', onScaleControlBiggerButtonClick);
+  formElement.querySelector('.scale__control--smaller').removeEventListener('click', onScaleControlSmallerButtonClick);
+  document.querySelector('.img-upload__effects').removeventListener('change', onChangeImageEffect);
+  editFormElement.classList.remove('hidden');
+  document.querySelector('body').classList.remove('modal-open');
+}
+
+function onFileUpload (evt) {
+  evt.preventDefault();
+  formElement.querySelector('.img-upload__cancel').addEventListener('click', onEditFormCancelClick);
+  formElement.addEventListener('input', onEditFormInput);
+  formElement.querySelector('.img-upload__text').addEventListener('keydown', onInputFormEscapeClick);
+  formElement.addEventListener('submit', onEditFormSubmit);
+  formElement.querySelector('.scale__control--bigger').addEventListener('click', onScaleControlBiggerButtonClick);
+  formElement.querySelector('.scale__control--smaller').addEventListener('click', onScaleControlSmallerButtonClick);
+  document.querySelector('.img-upload__effects').addEventListener('change', onChangeImageEffect);
+  window.addEventListener('keydown', onEscClick);
+  editFormElement.classList.remove('hidden');
+  document.querySelector('body').classList.add('modal-open');
+  insertUploadedImage();
+}
 
 export const initForm = () => {
-  form.querySelector('.img-upload__start').addEventListener('change', onFileUpload);
-  form.querySelector('.img-upload__cancel').addEventListener('click', onEditFormCancelClick);
-  form.addEventListener('input', onEditFormInput);
-  form.querySelector('.text__hashtags').addEventListener('keydown', onInputFormEscapeClick);
-  form.querySelector('.text__description').addEventListener('keydown', onInputFormEscapeClick);
-  form.addEventListener('submit', onEditFormSubmit);
-  form.querySelector('.scale__control--bigger').addEventListener('click', onScaleControlBiggerBtnClick);
-  form.querySelector('.scale__control--smaller').addEventListener('click', onScaleControlSmallerBtnClick);
-  document.querySelector('.img-upload__effects').addEventListener('change', onChangeImageEffect);
+  fileChooser.addEventListener('change', onFileUpload);
   initSlider();
 };
 

@@ -1,5 +1,6 @@
 import {openBigPicture} from './big-picture.js';
 
+const pictureContainerElement = document.querySelector('.pictures');
 let thumbnails = null;
 
 export const getThumbnails = () => {
@@ -36,14 +37,13 @@ const onThumbnailClick = (evt) => {
 const createThumbnails = (data) => Array.from(data, (thumbnail) => getThumbnailByTemplate(thumbnail));
 
 export const removeThumbnails = () => {
-  const pictures = document.querySelector('.pictures');
-  pictures.querySelectorAll('.picture').forEach((thumbnail) => thumbnail.remove());
+
+  pictureContainerElement.querySelectorAll('.picture').forEach((thumbnail) => thumbnail.remove());
 };
 
 export const initThumbnails = (data) => {
   const renderThumbnails = createThumbnails(data.slice());
-  const pictures = document.querySelector('.pictures');
-  renderThumbnails.forEach((thumbnail) => pictures.appendChild(thumbnail));
-  pictures.addEventListener('click', onThumbnailClick);
+  renderThumbnails.forEach((thumbnail) => pictureContainerElement.appendChild(thumbnail));
+  pictureContainerElement.addEventListener('click', onThumbnailClick);
   thumbnails = data;
 };
