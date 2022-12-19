@@ -17,7 +17,8 @@ const showSlider = () => {
   effectSliderContainer.classList.remove('hidden');
 };
 
-const imageEffectReset = () => {
+
+export const setDefaultEffect = () => {
   uploadImage.style.filter = EFFECT_SETTINGS.noEffect;
   hideSlider();
 };
@@ -26,7 +27,7 @@ export const onChangeImageEffect = (evt) => {
   const effectName = evt.target.value;
   uploadImage.className = effectName ? `effects__preview--${effectName}` : '';
   if (effectName === EFFECT_SETTINGS.noEffect) {
-    imageEffectReset();
+    setDefaultEffect();
     return;
   }
   if (effectSliderContainer.classList.contains('hidden')) {
@@ -53,4 +54,3 @@ export const initSlider = () => {
   const uiSlider = noUiSlider.create(effectLevelSlider, DEFAULT_SLIDER_CONFIG);
   uiSlider.on('update', onEffectValueChange);
 };
-

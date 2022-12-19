@@ -58,6 +58,8 @@ export const AVATAR_IND = {
 
 export const MAX_COMMENT_LENGTH = 140;
 
+export const ALERT_SHOW_TIME = 5000;
+
 export const PRISTINE_CONFIG = {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'has-danger',
