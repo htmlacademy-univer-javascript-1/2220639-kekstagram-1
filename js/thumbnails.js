@@ -1,6 +1,13 @@
 import {openBigPicture} from './big-picture.js';
 
-let photos = null;
+let thumbnails = null;
+
+export const getThumbnails = () => {
+  if (thumbnails === null) {
+    return;
+  }
+  return thumbnails;
+};
 
 const getThumbnailByTemplate = ({id, url, likes, comments}) => {
   const newThumbnail = document
@@ -16,25 +23,27 @@ const getThumbnailByTemplate = ({id, url, likes, comments}) => {
   return newThumbnail;
 };
 
-const onPictureClick = (evt) => {
+const onThumbnailClick = (evt) => {
   const target = evt.target;
   const picture = target.closest('.js-picture');
   if (picture) {
     const id = picture.dataset.id;
-    const photo = photos.filter((element) => element.id === +id);
+    const photo = thumbnails.filter((element) => element.id === +id);
     openBigPicture(photo[0]);
   }
 };
 
-const createThumbnails = (data) => Array.from(data, (photo) => getThumbnailByTemplate(photo));
+const createThumbnails = (data) => Array.from(data, (thumbnail) => getThumbnailByTemplate(thumbnail));
 
-const initThumbnails = (data) => {
-  const thumbnails = createThumbnails(data.slice());
+export const removeThumbnails = () => {
   const pictures = document.querySelector('.pictures');
-  thumbnails.forEach((thumbnail) => pictures.appendChild(thumbnail));
-  pictures.addEventListener('click', onPictureClick);
-  photos = data;
+  pictures.querySelectorAll('.picture').forEach((thumbnail) => thumbnail.remove());
 };
 
-
-export{initThumbnails};
+export const initThumbnails = (data) => {
+  const renderThumbnails = createThumbnails(data.slice());
+  const pictures = document.querySelector('.pictures');
+  renderThumbnails.forEach((thumbnail) => pictures.appendChild(thumbnail));
+  pictures.addEventListener('click', onThumbnailClick);
+  thumbnails = data;
+};

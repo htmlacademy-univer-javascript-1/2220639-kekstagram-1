@@ -132,3 +132,7 @@ export const EFFECT_SETTINGS = {
   },
 };
 
+export const SERVER_ADRESS = {
+  send: 'https://26.javascript.pages.academy/kekstagram',
+  get: 'https://26.javascript.pages.academy/kekstagram/data'
+};
