@@ -1,12 +1,14 @@
-const getRandomInt = (a, b) => {
+import { MAX_COMMENT_LENGTH } from './consts.js';
+
+export const getRandomInt = (a, b) => {
   const min = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
   const max = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
   return Math.round(Math.random() * (max - min) + min);
 };
-const getRandomArrayElement = (array) => array[getRandomInt(0, array.length - 1)];
+export const getRandomArrayElement = (array) => array[getRandomInt(0, array.length - 1)];
 
-const checkCommentLength = (comment, maxLength) => comment.length <= maxLength;
-checkCommentLength(3,5);
+export const percentageConvertToDouble = (percentageCount) => percentageCount * 0.01;
 
-export {getRandomArrayElement, getRandomInt};
+export const checkCommentLength = (comment) => comment.length <= MAX_COMMENT_LENGTH;
+
 

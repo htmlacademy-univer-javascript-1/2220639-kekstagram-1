@@ -48,6 +48,7 @@ const onCancelEditForm = () => {
   setDefaultScale();
   setDefaultEffect();
   resetInputValue();
+
 };
 
 const cancelEditForm = () => {
@@ -85,11 +86,10 @@ const onEditFormSubmit = (evt) => {
   }
 };
 
+
 export const initForm = () => {
-  const startUpload = form.querySelector('.img-upload__start');
-  startUpload.addEventListener('change', onFileUpload);
-  const cancelEditFormButton = form.querySelector('.img-upload__cancel');
-  cancelEditFormButton.addEventListener('click', onEditFormCancelClick);
+  form.querySelector('.img-upload__start').addEventListener('change', onFileUpload);
+  form.querySelector('.img-upload__cancel').addEventListener('click', onEditFormCancelClick);
   form.addEventListener('input', onEditFormInput);
   form.querySelector('.text__hashtags').addEventListener('keydown', onInputFormEscapeClick);
   form.querySelector('.text__description').addEventListener('keydown', onInputFormEscapeClick);

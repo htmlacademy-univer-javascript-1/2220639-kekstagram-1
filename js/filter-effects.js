@@ -17,6 +17,7 @@ const showSlider = () => {
   effectSliderContainer.classList.remove('hidden');
 };
 
+
 export const setDefaultEffect = () => {
   uploadImage.style.filter = EFFECT_SETTINGS.noEffect;
   hideSlider();
