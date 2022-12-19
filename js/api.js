@@ -1,7 +1,8 @@
 import { showAlertMessage } from './render-message.js';
+import { SERVER_ADRESS } from './consts.js';
 
 export const getData = (onSuccess) => {
-  fetch('https://26.javascript.pages.academy/kekstagram/data')
+  fetch(SERVER_ADRESS.get)
     .then((response) =>  {
       if (response.ok) {
         return response.json();
@@ -16,7 +17,7 @@ export const getData = (onSuccess) => {
 };
 
 export const sendData = (onSuccess, onFail, onFinally, body) => {
-  fetch('https://26.javascript.pages.academy/kekstagram',
+  fetch(SERVER_ADRESS.send,
     {
       method: 'POST',
       body,
