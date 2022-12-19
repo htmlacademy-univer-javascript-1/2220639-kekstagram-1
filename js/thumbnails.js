@@ -1,6 +1,6 @@
-import {getPhotos} from './mock.js';
 import {openBigPicture} from './big-picture.js';
 
+let photos = null;
 
 const getThumbnailByTemplate = ({id, url, likes, comments}) => {
   const newThumbnail = document
@@ -17,7 +17,6 @@ const getThumbnailByTemplate = ({id, url, likes, comments}) => {
 };
 
 const onPictureClick = (evt) => {
-  const photos = getPhotos();
   const target = evt.target;
   const picture = target.closest('.js-picture');
   if (picture) {
@@ -34,6 +33,7 @@ const initThumbnails = (data) => {
   const pictures = document.querySelector('.pictures');
   thumbnails.forEach((thumbnail) => pictures.appendChild(thumbnail));
   pictures.addEventListener('click', onPictureClick);
+  photos = data;
 };
 
 

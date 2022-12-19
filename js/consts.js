@@ -47,3 +47,79 @@ export const AVATAR_IND = {
   min: 1,
   max: 6
 };
+export const MAX_COMMENT_LENGTH = 140;
+
+export const ALERT_SHOW_TIME = 5000;
+
+export const PRISTINE_CONFIG = {
+  classTo: 'img-upload__field-wrapper',
+  errorClass: 'has-danger',
+  successClass: 'has-success',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextTag: 'div',
+  errorTextClass: 'pristine-error'
+};
+
+export const DEFAULT_SLIDER_CONFIG = {
+  range: {min: 0, max: 1},
+  start: 1,
+  step: 0.1,
+  connect: 'lower'
+};
+
+export const EFFECT_UNITS = {
+  chrome: '',
+  sepia: '',
+  marvin: '%',
+  phobos: 'px',
+  heat: ''
+};
+
+export const EFFECT_SETTINGS = {
+  noEffect: 'none',
+  chrome: {
+    options: {
+      range: { min: 0, max: 1, },
+      start: 1,
+      step: 0.1,
+    },
+    style: 'grayscale'
+  },
+
+  sepia: {
+    options: {
+      range: { min: 0, max: 1, },
+      start: 1,
+      step: 0.1,
+    },
+    style: 'sepia'
+  },
+
+  marvin: {
+    options: {
+      range: { min: 0, max: 100, },
+      start: 100,
+      step: 1,
+    },
+    style: 'invert'
+  },
+
+  phobos: {
+    options: {
+      range: { min: 0, max: 3, },
+      start: 3,
+      step: 0.1,
+    },
+    style: 'blur'
+  },
+
+  heat: {
+    options: {
+      range: { min: 1, max: 3, },
+      start: 3,
+      step: 0.1,
+    },
+    style: 'brightness'
+  },
+};
+
